@@ -48,4 +48,5 @@ Description
 Authors     Arthur Bit-Monnot <abitmonnot@laas.fr> and Roland Godet <rgodet@laas.fr>
 SupportsRecursion 
 SupportsPartialOrder 
-SupportsOptimalPlanning 
+SupportsOptimalPlanning
+SupportsUniversalPreconditions no
