@@ -21,10 +21,13 @@ From: ubuntu:22.04
 	
 	## Install all necessary dependencies.
 	apt-get update
-	apt-get -y install make g++
+	apt-get -y install build-essential curl
+	curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh -s -- -y
+	PATH="$HOME/.cargo/bin:$PATH"
 	
 	## go to directory and make the planner
-	cd /planner
+	cd /planner/planner
+	cargo build --release --bin lcp
 	
 	## remove files not needed to execute the planner
 
@@ -39,6 +42,7 @@ From: ubuntu:22.04
 	PLANFILE=$3
 
 	## run your planner here
+	./planner/target/release/lcp -o $PLANFILE -d $DOMAINFILE $PROBLEMFILE
 
 ## Update the following fields with meta data about your submission.
 ## Please use the same field names and use only one line for each value.
