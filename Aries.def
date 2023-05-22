@@ -42,7 +42,7 @@ From: ubuntu:22.04
 	PLANFILE=$3
 
 	## run your planner here
-	./planner/target/release/lcp -o $PLANFILE -d $DOMAINFILE $PROBLEMFILE
+	exec /planner/planner/target/release/lcp -o $PLANFILE -d $DOMAINFILE $PROBLEMFILE
 
 ## Update the following fields with meta data about your submission.
 ## Please use the same field names and use only one line for each value.
