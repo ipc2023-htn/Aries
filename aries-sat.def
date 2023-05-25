@@ -1,0 +1,33 @@
+Bootstrap: docker
+From: ubuntu:22.04
+
+%files
+	install.sh /install.sh
+
+%setup
+	## The "%setup"-part of this script is called to bootstrap an empty
+	## container.
+
+%post
+	sh install.sh
+
+%runscript
+	## DOMAINFILE and PROBLEMFILE contain the HDDL input files.
+	DOMAINFILE=$1
+	PROBLEMFILE=$2
+	## PLANFILE is the name of the file to which your planner should write the plan it found.
+	PLANFILE=$3
+
+	## run your planner here
+	exec /aries-planner $PROBLEMFILE --domain $DOMAINFILE --optimize plan-length --anytime --output $PLANFILE
+
+## Update the following fields with meta data about your submission.
+## Please use the same field names and use only one line for each value.
+%labels
+Name        Aries
+Description 
+Authors     Arthur Bit-Monnot <abitmonnot@laas.fr> 
+SupportsRecursion yes
+SupportsPartialOrder yes
+SupportsOptimalPlanning no
+SupportsUniversalPreconditions yes
