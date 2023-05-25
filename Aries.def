@@ -56,7 +56,7 @@ From: ubuntu:22.04
 	PLANFILE=$3
 
 	## run your planner here
-	exec /aries-planner -o $PLANFILE -d $DOMAINFILE $PROBLEMFILE
+	exec /aries-planner $PROBLEMFILE --domain $DOMAINFILE --optimize plan-length --anytime --output $PLANFILE
 
 ## Update the following fields with meta data about your submission.
 ## Please use the same field names and use only one line for each value.
