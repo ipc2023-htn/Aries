@@ -6,7 +6,7 @@ From: ubuntu:22.04
 	## If you do so, please remove all files not needed to run the planner
 	## (e.g. source-code, testing or debugging planning problems) from the container
 	## to decrease its size as much as possible.
-	. /planner	
+	# . /planner	
 
 %setup
 	## The "%setup"-part of this script is called to bootstrap an empty
@@ -21,15 +21,29 @@ From: ubuntu:22.04
 	
 	## Install all necessary dependencies.
 	apt-get update
-	apt-get -y install build-essential curl
+	apt-get -y install curl git build-essential 
+
+	# Install Rust compiler
 	curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh -s -- -y
 	PATH="$HOME/.cargo/bin:$PATH"
+
+	# Get aries sources
+	git clone -b ipc-2023 https://github.com/plaans/aries.git aries
 	
 	## go to directory and make the planner
-	cd /planner/planner
+	cd aries
 	cargo build --release --bin lcp
+	cd ..
+
+	# Save executable
+	cp aries/target/release/lcp /aries-planner
 	
 	## remove files not needed to execute the planner
+	rm -rf aries/
+	rm -rf $HOME/.cargo
+	apt-get -y purge curl git build-essential 
+	apt-get -y autoremove
+	apt-get -y clean
 
 %runscript
 	## The runscript is called whenever the container is used to solve
@@ -42,7 +56,7 @@ From: ubuntu:22.04
 	PLANFILE=$3
 
 	## run your planner here
-	exec /planner/planner/target/release/lcp -o $PLANFILE -d $DOMAINFILE $PROBLEMFILE
+	exec /aries-planner -o $PLANFILE -d $DOMAINFILE $PROBLEMFILE
 
 ## Update the following fields with meta data about your submission.
 ## Please use the same field names and use only one line for each value.
@@ -50,7 +64,7 @@ From: ubuntu:22.04
 Name        Aries
 Description 
 Authors     Arthur Bit-Monnot <abitmonnot@laas.fr> and Roland Godet <rgodet@laas.fr>
-SupportsRecursion 
-SupportsPartialOrder 
-SupportsOptimalPlanning
-SupportsUniversalPreconditions no
+SupportsRecursion yes
+SupportsPartialOrder yes
+SupportsOptimalPlanning no
+SupportsUniversalPreconditions yes
