@@ -3,6 +3,7 @@ From: ubuntu:22.04
 
 %files
 	install.sh /install.sh
+	aries aries
 
 %setup
 	## The "%setup"-part of this script is called to bootstrap an empty

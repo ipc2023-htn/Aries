@@ -7,8 +7,8 @@ apt-get -y install curl git build-essential
 curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh -s -- -y
 PATH="$HOME/.cargo/bin:$PATH"
 
-# Get aries sources
-git clone -b ipc-2023 https://github.com/plaans/aries.git aries
+# Get aries sources from git (now copied from this repository)
+# git clone -b ipc-2023 https://github.com/plaans/aries.git aries
 
 ## build planner
 cd aries
