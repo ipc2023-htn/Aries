@@ -1,0 +1,37 @@
+[workspace]
+
+members = [
+  "solver",
+  "env_param",
+  "planning/planning",
+  "planning/planners",
+  "planning/grpc/api",
+  "planning/grpc/server",
+  "examples/sat",
+  "examples/scheduling",
+  "examples/smt",
+  "examples/gg",
+  "examples/knapsack",
+  "validator",
+]
+
+[workspace.dependencies]
+anyhow = { version = "1.0"}
+clap = {version = "4.0", features = ["derive"]}
+tracing = { version = "0.1", features = ["release_max_level_debug"] }
+tracing-subscriber = "0.3"
+
+[profile.dev]
+opt-level = 0
+
+[profile.release]
+codegen-units = 8
+debug = false # No debug symbols to keep executables small
+lto = "thin"
+opt-level = 3
+panic = "abort"
+
+# A profile meant for usage in CI, provide reasonable build/execution times. Also enables debug assertions and symbols.
+[profile.ci]
+inherits = "dev"
+opt-level = 3

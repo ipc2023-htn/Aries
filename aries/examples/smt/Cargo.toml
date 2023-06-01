@@ -1,0 +1,9 @@
+[package]
+name = "aries_smt"
+version = "0.1.0"
+authors = ["Arthur Bit-Monnot <abitmonnot@laas.fr>"]
+edition = "2018"
+
+[dependencies]
+aries = { path = "../../solver" }
+itertools = { version = "0.10" }

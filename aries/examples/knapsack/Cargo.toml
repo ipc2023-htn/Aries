@@ -1,0 +1,13 @@
+[package]
+name = "aries_knapsack"
+version = "0.1.0"
+authors = ["Arthur Bit-Monnot <abitmonnot@laas.fr>"]
+edition = "2018"
+
+[dependencies]
+aries = { path = "../../solver" }
+
+
+[[bin]]
+name = "aries-knapsack"
+path = "main.rs"
